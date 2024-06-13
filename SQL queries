@@ -1,0 +1,96 @@
+1. who prefers energy drink more ? (male/female/non binary)
+
+    SELECT gender ,count(Respondent_ID) as Total_Respondents
+    FROM food_beverage.dim_repondents group by gender order by 
+    Total_respondents desc;
+
+2. which age group prefers energy drinks more ?
+
+    SELECT Age ,count(Respondent_ID) as Total_Respondents
+    FROM food_beverage.dim_repondents group by Age order by 
+    Total_respondents desc;
+
+3. which type of marketing reaches the most youth(15-30)?
+
+    select f.Marketing_channels,count(r.Respondent_ID) as Youth_Reach
+    from dim_repondents r
+    join fact_survey_responses f
+    on r.Respondent_ID=f.Respondent_ID
+    where Age in('15-18','19-30')
+    group by f.Marketing_channels order by Youth_Reach desc;
+
+4. what are the preferred ingredients of energy drinks among respondents?
+
+    select Ingredients_expected,count(Respondent_ID)as Total_Respondents
+    from fact_survey_responses
+    group by Ingredients_expected
+    order by Total_Respondents desc;
+
+5. what packaging preferences do respondents have for energy drinks?
+
+    select Packaging_Preference,count(Respondent_ID) AS Total_Respondents
+    from fact_survey_responses
+    group by Packaging_Preference
+    order by Total_Respondents desc;
+
+6. who are the current market leaders?
+
+  select Current_brands,count(Respondent_ID) AS Total_Respondents
+  from fact_survey_responses
+  group by Current_brands
+  order by Total_Respondents desc;
+
+7. what are the primary reasons consumers prefer those brands over ours?
+
+  select Reasons_for_choosing_brands,count(Respondent_ID)as Total_Respondents
+  from fact_survey_responses 
+  group by Reasons_for_choosing_brands
+  order by Total_Respondents desc;
+
+8. what do people think about our brand?(overall rating)
+
+   select Brand_perception,count(*)as Total_Respondents,round(avg(Taste_experience),1)  as rating
+   from fact_survey_responses where Current_brands="CodeX" 
+   group by Brand_perception 
+   order by Total_Respondents desc;
+
+   select round(avg(Taste_experience),1) as rating from fact_survey_responses
+   where Current_brands="CodeX";
+
+   select count(Heard_Before),Respondent_ID from fact_survey_responses
+   where Current_brands="CodeX" group by Respondent_ID;
+
+   select count(Tried_Before),Respondent_ID from fact_survey_responses
+   where Current_brands="CodeX" group by Respondent_ID;
+
+9.  which cities do we need to focus more on ?
+
+    select c.city,c.Tier,count(r.Respondent_ID) as Total_Respondents 
+    from dim_cities c
+    join dim_repondents r
+    on c.City_ID=r.City_ID
+   join fact_survey_responses f 
+   on f.Respondent_ID=r.Respondent_ID
+   where f.Current_brands="CodeX"
+   group by c.City,c.Tier order by Total_Respondents  desc;
+
+10. where do respondents prefer to purchase energy drinks? what factors influence respondents purchase decisions,such as price range and limited edition packaging and also typical consumption situations for 
+    energy drinks among respondents?
+
+    select Purchase_location ,count(Respondent_ID)as Total_Respondents
+    from fact_survey_responses
+    group by Purchase_location
+    order by Total_Respondents desc;
+
+   select Price_range,
+   count(Respondent_ID)as Total_Respondents
+   from fact_survey_responses 
+   group by Price_range
+   order by Total_Respondents desc;
+
+  select Limited_edition_packaging,count(Respondent_ID)as Total_Respondents
+  from fact_survey_responses 
+  group by Limited_edition_packaging
+  order by Total_Respondents desc;
+
+
