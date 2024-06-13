@@ -55,3 +55,5 @@ Provide insights required by the marketing team
 
 [presentation Link](https://www.canva.com/design/DAGGo7btTJw/PE74usGgQjVnfcfrpulq5Q/view?utm_content=DAGGo7btTJw&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
+[Dashboard link](https://app.powerbi.com/view?r=eyJrIjoiZmZiMTE4NWQtMmM1MC00ZmI1LTk2NzQtM2Y3ZDUxZDAwODQ1IiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9)
+
